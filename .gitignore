@@ -1,0 +1,6 @@
+*.png
+*.webm
+data/*
+*/__pycache__
+figures/*
+/toolboxes

@@ -1,0 +1,4 @@
+
+ ffmpeg -ss 53.48 -i "zebra_stabilized.webm" -t 73.448 frames_ep1/%05d.png
+ ffmpeg -ss 85.528 -i "zebra_stabilize.webm" -t 52.798 frames_ep2/%05d.png
+ ffmpeg -ss 174.255 -i "zebra_stabilize.webm" -t 50.127 frames_ep3/%05d.png
