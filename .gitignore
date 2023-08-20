@@ -4,3 +4,9 @@ data/*
 */__pycache__
 figures/*
 /toolboxes
+/05_analysis/Pipfile
+/05_analysis/Pipfile.lock
+/01_tracking/Etosha walking (driving) with the zebra [k2QWqkwGCE4].webm.mlt
+/01_tracking/*.mlt
+/01_tracking/Etosha walking (driving) with the zebra [k2QWqkwGCE4].webm.mlt.trf
+/01_tracking/*.trf
