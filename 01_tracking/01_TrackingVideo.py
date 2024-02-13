@@ -14,7 +14,7 @@ dpi = 150
 
 if False:
     for i in range(3):
-        OS.system(f"""ffmpeg -pattern_type glob -i "frames_ep{i+1}/*.png" -c:v libvpx-vp9 -crf 24 ../figures/zebra_ep{i}.webm""")
+        OS.system(f"""ffmpeg -y -r 25 -pattern_type glob -i "frames_ep{i+1}/*.png" -c:v libvpx-vp9 -crf 24 ../figures/zebra_ep{i}.webm""")
 
 
 for i in range(1, 4):
@@ -66,6 +66,13 @@ for i in range(1, 4):
         ax.set_xticks([])
         ax.set_yticks([])
 
+        # lim = ax.get_xlim()
+        # room = 200
+        # lim = [ NP.max([lim[0], NP.min(points[:, 0])-room]) \
+        #         , NP.min([lim[1], NP.max(points[:, 0])+room]) \
+        #        ]
+        # ax.set_xlim(lim)
+        # # does not work
 
         fig.savefig(f'tracked_ep{i}/{frame_nr:04.0f}.png')
         PLT.close()
@@ -73,7 +80,7 @@ for i in range(1, 4):
 
 
     if True:
-        OS.system(f"""ffmpeg -pattern_type glob -i "tracked_ep{i}/*.png" -c:v libvpx-vp9 -crf 24 ../figures/zebra_ep{i}_tracked.webm""")
+        OS.system(f"""ffmpeg -y -r 25 -pattern_type glob -i "tracked_ep{i}/*.png" -c:v libvpx-vp9 -crf 24 ../figures/zebra_ep{i}_tracked.webm""")
 
 """
 snout_x
