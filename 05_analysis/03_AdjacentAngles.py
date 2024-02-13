@@ -7,8 +7,8 @@ import numpy as NP          # numerical analysis
 import matplotlib as MP     # plotting, low level API
 import matplotlib.pyplot as PLT # plotting, high level API
 
-
 dpi=300
+
 
 SYS.path.append('../03_fcas') # makes the folder where the toolbox files are located accessible to python
 from Config import config as config # project configuration
@@ -76,9 +76,12 @@ if __name__ == "__main__":
 
     fig, sig_domain, frq_domain = MakeSignalFigure()
 
+    reference = 'wrist'
+    joint = 'elbow'
+
     avg_fsd = []
     for idx in cycles:
-        angle = cyclized_angles.loc[cyclized_angles['cycle_nr'] == idx, 'wrist'].values
+        angle = cyclized_angles.loc[cyclized_angles['cycle_nr'] == idx, joint].values
         time = NP.linspace(0., 1., len(angle), endpoint = True)
         sig_domain.plot(time, angle, color = 'darkred', lw = 0.5, alpha = 0.1, zorder = 10)
     #
@@ -96,10 +99,10 @@ if __name__ == "__main__":
     #
 
     EqualLimits(frq_domain)
-    fig.suptitle('zebra wrist angle - raw')
+    fig.suptitle(f'zebra {joint} angle - raw')
     fig.tight_layout()
-    fig.savefig('../figures/zebra_wrist_raw.svg', transparent = False, dpi = dpi)
-    fig.savefig('../figures/zebra_wrist_raw.png', transparent = False, dpi = dpi)
+    fig.savefig(f'../figures/zebra_{joint}_raw.svg', transparent = False, dpi = dpi)
+    fig.savefig(f'../figures/zebra_{joint}_raw.png', transparent = False, dpi = dpi)
     PLT.show()
 
     avg_raw = average
@@ -107,19 +110,20 @@ if __name__ == "__main__":
 
 
     limbs = ReLoadLimbs(cycles)
-    wrists = {idx: lmb['wrist'] for idx, lmb in limbs.items()}
+    references = {idx: lmb[joint] for idx, lmb in limbs.items()}
+    joints = {idx: lmb[joint] for idx, lmb in limbs.items()}
 
     fig, sig_domain, frq_domain = MakeSignalFigure()
-    # print (wrists)
+    # print (joints)
 
     time = NP.linspace(0., 1., 101, endpoint = True)
 
-    for wrist in wrists.values():
+    for wrist in joints.values():
         sig_domain.plot(time, wrist.Reconstruct(x_reco = time, period = 1.), color = 'darkblue', lw = 0.5, alpha = 0.1, zorder = 10)
         frq_domain.plot(wrist._c.iloc[1:, 0], wrist._c.iloc[1:, 1], ls = '-', color = 'darkblue', lw = 0.5, alpha = 0.1, zorder = 10)
 
     average = FT.ProcrustesAverage( \
-                            [jnt for jnt in wrists.values()] \
+                            [jnt for jnt in joints.values()] \
                             , n_iterations = 5, skip_scale = False, post_align = True \
                             )
     # print (average)
@@ -131,8 +135,8 @@ if __name__ == "__main__":
     frq_domain.plot(avg_raw._c.iloc[1:, 0], avg_raw._c.iloc[1:, 1], ls = '--', lw = 0.5, color = 'k', alpha = 0.9, zorder = 50)
 
     EqualLimits(frq_domain)
-    fig.suptitle('zebra wrist angle - aligned')
+    fig.suptitle('Zebra Wrist Angle - Aligned')
     fig.tight_layout()
-    fig.savefig('../figures/zebra_wrist_aligned.svg', transparent = False, dpi = dpi)
-    fig.savefig('../figures/zebra_wrist_aligned.png', transparent = False, dpi = dpi)
+    fig.savefig('../figures/zebra_elbow_wristaligned.svg', transparent = False, dpi = dpi)
+    fig.savefig('../figures/zebra_elbow_wristaligned.png', transparent = False, dpi = dpi)
     PLT.show()
