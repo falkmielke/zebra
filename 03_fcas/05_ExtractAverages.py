@@ -40,7 +40,7 @@ def GetAverages(some_limbs \
     # first, get the average of the reference joint...
 
     for jnt in config['joint_selection']:
-        print (f'averaging {jnt} angle profile...', ' '*16, end = '\r', flush = True)
+        print (f'averaging {jnt} angle profile...', ' '*16)#, end = '\r', flush = True)
         average = FT.ProcrustesAverage( \
                             [lmb[jnt] for lmb in some_limbs.values() \
                              if jnt in lmb.keys()] \
