@@ -14,7 +14,7 @@ dpi = 150
 
 if False:
     for i in range(3):
-        OS.system(f"""ffmpeg -y -r 25 -pattern_type glob -i "frames_ep{i+1}/*.png" -c:v libvpx-vp9 -crf 24 ../figures/zebra_ep{i}.webm""")
+        OS.system(f"""ffmpeg -y -r 25 -pattern_type glob -i "frames_ep{i+1}/*.png" -c:v libvpx-vp9 -crf 24 ../figures/zebra_ep{i+1}.webm""")
 
 
 for i in range(1, 4):

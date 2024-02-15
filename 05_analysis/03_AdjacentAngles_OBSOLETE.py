@@ -124,7 +124,7 @@ if __name__ == "__main__":
 
     average = FT.ProcrustesAverage( \
                             [jnt for jnt in joints.values()] \
-                            , n_iterations = 5, skip_scale = False, post_align = True \
+                            , n_iterations = 5, skip_scale = False, post_align = False \
                             )
     # print (average)
     sig_domain.plot(time, average.Reconstruct(x_reco = time, period = 1.), color = 'k', alpha = 0.9, zorder = 50)
@@ -135,7 +135,7 @@ if __name__ == "__main__":
     frq_domain.plot(avg_raw._c.iloc[1:, 0], avg_raw._c.iloc[1:, 1], ls = '--', lw = 0.5, color = 'k', alpha = 0.9, zorder = 50)
 
     EqualLimits(frq_domain)
-    fig.suptitle('Zebra Wrist Angle - Aligned')
+    fig.suptitle(f'zebra {joint} angle - aligned')
     fig.tight_layout()
     fig.savefig('../figures/zebra_elbow_wristaligned.svg', transparent = False, dpi = dpi)
     fig.savefig('../figures/zebra_elbow_wristaligned.png', transparent = False, dpi = dpi)
